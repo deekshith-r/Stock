@@ -1,0 +1,253 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mock Trading App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .stock-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .stock {
+            flex: 1;
+        }
+
+        .actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .buy {
+            background-color: #28a745;
+            color: #fff;
+        }
+
+        .sell {
+            background-color: #dc3545;
+            color: #fff;
+        }
+
+        .trade-summary {
+            margin-top: 40px;
+            padding: 10px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 3px;
+        }
+
+        .summary-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+
+        .arrow-up {
+            color: green;
+        }
+
+        .arrow-down {
+            color: red;
+        }
+
+        .summary-boxes {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .summary-box {
+            flex: 1;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .summary-box-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .summary-box-value {
+            font-size: 14px;
+        }
+
+        canvas {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Mock Trading App</h1>
+        <div class="stock-info">
+            <div class="stock">
+                <input type="text" id="ticker" placeholder="Enter Ticker Symbol">
+                <button class="button" onclick="getStockData()">Get Data</button>
+                <canvas id="stockChart"></canvas>
+            </div>
+            <div class="actions">
+                <button class="button buy" onclick="buyStock()">Buy <span class="arrow-up">&#8593;</span></button>
+                <button class="button sell" onclick="sellStock()">Sell <span class="arrow-down">&#8595;</span></button>
+            </div>
+        </div>
+        <div class="summary-boxes">
+            <div class="summary-box">
+                <div class="summary-box-title">Buy</div>
+                <div id="inQuantity" class="summary-box-value">0</div>
+                <div class="summary-box-info">Trade Info</div>
+            </div>
+            <div class="summary-box">
+                <div class="summary-box-title">Sell</div>
+                <div id="outQuantity" class="summary-box-value">0</div>
+                <div class="summary-box-info">Trade Info</div>
+            </div>
+            <div class="summary-box">
+                <div class="summary-box-title">Total</div>
+                <div id="totalQuantity" class="summary-box-value">0</div>
+                <div class="summary-box-info">Trade Info</div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        let stockChart;
+        let inQuantity = 0;
+        let outQuantity = 0;
+
+        // Mock data for chart (will be replaced with real data)
+        const mockData = {
+            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+            datasets: [{
+                label: 'Stock Price',
+                data: [100, 110, 105, 120, 115, 130],
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 1
+            }]
+        };
+
+        // Chart configuration
+        const chartConfig = {
+            type: 'line',
+            data: mockData,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        // Create the chart
+        const ctx = document.getElementById('stockChart').getContext('2d');
+        stockChart = new Chart(ctx, chartConfig);
+
+        // Get stock data function
+        function getStockData() {
+            const ticker = document.getElementById('ticker').value.toUpperCase();
+            // Placeholder logic to fetch real-time data
+            const newData = generateRandomData();
+            updateChart(newData);
+        }
+
+        // Generate random data for chart (placeholder function)
+        function generateRandomData() {
+            const data = [];
+            for (let i = 0; i < 30; i++) {
+                data.push(getRandomNumber(100, 200));
+            }
+            return data;
+        }
+
+        // Get random number within a range
+        function getRandomNumber(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        // Update chart with new data
+        function updateChart(newData) {
+            stockChart.data.datasets[0].data = newData;
+            stockChart.update();
+        }
+
+        // Buy stock function
+        function buyStock() {
+            inQuantity += 1;
+            updateTradeSummary();
+        }
+
+        // Sell stock function
+        function sellStock() {
+            outQuantity += 1;
+            updateTradeSummary();
+        }
+
+        // Update trade summary function
+        function updateTradeSummary() {
+            document.getElementById('inQuantity').innerText = inQuantity;
+            document.getElementById('outQuantity').innerText = outQuantity;
+            document.getElementById('totalQuantity').innerText = inQuantity - outQuantity;
+
+            // Update trade info in summary boxes
+            document.querySelector('.summary-box:nth-child(1) .summary-box-info').innerText = `Buy Info: ${inQuantity} shares traded`;
+            document.querySelector('.summary-box:nth-child(2) .summary-box-info').innerText = `Sell Info: ${outQuantity} shares traded`;
+            document.querySelector('.summary-box:nth-child(3) .summary-box-info').innerText = `Total Info: ${inQuantity - outQuantity} shares traded`;
+        }
+    </script>
+</body>
+
+</html>

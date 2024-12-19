@@ -1,0 +1,220 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Developer Info</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'image/dollar_icon.png' %}">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS with specified colors -->
+    <style>
+        :root {
+            --primary: #EB1616;
+            --secondary: #191C24;
+            --light: #6C7293;
+            --dark: #000000;
+        }
+
+        /* Custom CSS to center headings */
+        .section-heading {
+            text-align: center;
+            color: var(--primary); /* Use primary color for headings */
+        }
+        .mb-5 {
+        margin-bottom: 1rem !important;
+        }
+
+        /* Custom CSS for content sections */
+        .content-section {
+            background-color: #181D24; /* Use specified background color */
+            padding: 10px 0;
+        }
+
+        .content {
+            margin: 0 auto; /* Center the content horizontally */
+            width: 95%; /* Expand content box to 95% of screen width */
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0px 0px 105px rgba(0, 0, 0, 0.1);
+            line-height: 1.8; /* Increased line spacing */
+            text-align: justify; /* Align text to justify */
+            overflow: hidden; /* Hide extra content below */
+        }
+
+
+
+        /* Adjust content box height based on content */
+        .content ol {
+            margin-bottom: 0; /* Remove default bottom margin for the list */
+        }
+
+        /* Developer Box Styling */
+        .developer-box {
+            background-color: #15151A;
+            color: var(--light);
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            display: inline-block; /* Display boxes inline */
+            width: calc(50% - 20px); /* Set width for each box (half of container width minus margin) */
+            margin-right: 20px; /* Add spacing between boxes */
+            vertical-align: top; /* Align boxes at the top */
+            /* Remove the background color behind the border */
+            background-clip: padding-box;
+        }
+
+        .developer-box:last-child {
+            margin-right: 0; /* Remove margin for the last box to prevent extra spacing */
+        }
+
+        .developer-name {
+            font-size: 24px;
+            font-weight: bold;
+            margin-left: 110px; /* Adjust margin to align text properly with photo */
+        }
+
+        .developer-bio {
+            font-size: 16px;
+            margin-bottom: 10px;
+            margin-left: 110px; /* Adjust margin to align text properly with photo */
+        }
+
+        .developer-photo {
+            width: 100px; /* Adjust photo width */
+            height: 100px; /* Adjust photo height */
+            border-radius: 50%; /* Make photo round */
+            margin-right: 10px; /* Add spacing between photo and text */
+            float: left; /* Float the photo to the left */
+        }
+
+        .social-icons {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .social-icons a {
+            color: var(--light);
+            margin-right: 10px;
+        }
+
+        .social-icons a:hover {
+            color: var(--primary);
+        }
+
+        /* Additional Styling for Text Below Developer Info */
+        .text-below-developer {
+            text-align: center;
+            color: var(--light);
+            margin-top: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    
+    <div class="container-fluid position-relative p-0">
+        <div class="content-container">
+            <!-- Developer Info Section Start -->
+            <section id="developer-info" class="content-section">
+                <div class="container">
+                    <h2 class="section-heading mb-5">DEVELOPER INFO</h2>
+                    <p class="text-center">This Project is Developed by Students of the Department of AIML</p>
+                    <div class="row justify-content-center">
+                        <div class="developer-box">
+                            <img src="{% static 'image/Deekshith.jpeg' %}" alt="Developer Photo" class="developer-photo">
+                            <div class="developer-name">Deekshith R</div>
+                            <div class="developer-bio">4AL20AI012</div>
+                            <div class="developer-bio">Experienced web developer specializing in frontend and backend technologies.</div>
+                            <div class="social-icons">
+                                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                        <div class="developer-box">
+                            <img src="{% static 'image/Harsha.jpg' %}" alt="Developer Photo" class="developer-photo">
+                            <div class="developer-name">Harsha K</div>
+                            <div class="developer-bio">4AL20AI017</div>
+                            <div class="developer-bio">Passionate Fresher with expertise in AI and machine learning.</div>
+                            <div class="social-icons">
+                                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Developer Info Section End -->
+
+            <!-- Project Guides Section Start -->
+            <section id="project-guides" class="content-section">
+                <div class="container">
+                    <h2 class="section-heading mb-5">PROJECT GUIDE</h2>
+                    <p class="text-center">This Project is Developed Under the Guidance of</p>
+                    <div class="row justify-content-center">
+                        <div class="developer-box">
+                            <img src="{% static 'image/ram.jpg' %}" alt="Developer Photo" class="developer-photo" style="margin-top: 10px;">
+                            <div class="developer-details">
+                                <div class="developer-name">DR. Ramesh G</div>
+                                <div class="developer-bio">Associate Professor</div>
+                                <div class="developer-bio">Currently working as a professor in the Department of Artificial Intelligence and Machine Learning, AIET. He has completed his B.E and M.Tech from Vishveswaraya Technological University (VTU), Karnataka. He has attended various FDP programs. His current research lies in the areas of Image Processing, Machine learning, Deep learning.</div>
+                            </div>
+                            <div class="social-icons text-center"> <!-- Added text-center class here -->
+                                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            
+
+        </div>
+    </div>
+ <!-- Footer Start -->
+ <div class="container-fluid position-relative p-0">
+    <div class="bg-secondary rounded-top p-4">
+        <div class="row">
+            <div class="col-12 col-sm-6 text-center text-sm-start">
+                &copy; <a href="#">Department of AIML</a>, All Right Reserved. 
+            </div>
+            <div class="col-12 col-sm-6 text-center text-sm-end">
+                Designed By <a href="https://portfolio-website-azure-eta.vercel.app/">Deekshith Harsha</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer End -->
+</div>
+<!-- Content End -->
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

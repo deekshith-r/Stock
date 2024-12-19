@@ -1,0 +1,506 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Stock Market Prediction</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'image/dollar_icon.png' %}">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- Libraries Stylesheet -->
+    <link href="{% static 'lib/owlcarousel/assets/owl.carousel.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css' %}" rel="stylesheet" />
+
+    <!-- Customized Bootstrap Stylesheet -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Template Stylesheet -->
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+     <!-- Spinner Start -->
+<div id="spinner" class="show bg-dark position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
+    <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+    <div class="text-light mt-3">Unlocking the Future...</div> <!-- Innovative text -->
+</div>
+<!-- Spinner End -->
+
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-secondary navbar-dark">
+                <a href="#" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa-solid fa-hand-holding-dollar"></i>Tradify</h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <img class="rounded-circle" src="{% static 'image/user.png' %}" alt="" style="width: 40px; height: 40px;">
+                        <div class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1"></div>
+                    </div>
+                    <div class="ms-3">
+                        <h6 class="mb-0">Welcome</h6>
+                    
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+                    <a href="#" class="nav-item nav-link active"><i class="fa fa-home me-2"></i>Home</a>
+                    <a href="/search" class="nav-item nav-link"><i class="fa fa-search me-2"></i>Predict</a>
+                    <a href="/ticker" class="nav-item nav-link"><i class="bi bi-info-circle"></i> Ticker Info</a>                 
+                    <a href="/terms" class="nav-item nav-link"><i class="fa fa-list-alt me-2"></i>Terms of Service</a>
+                    <a href="/dev" class="nav-item nav-link"><i class="bi bi-people"></i> Developers Info</a>
+
+
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Navbar Start -->
+            <nav class="navbar navbar-expand bg-secondary navbar-dark sticky-top px-4 py-0">
+                <a href="index.html" class="navbar-brand d-flex d-lg-none me-4">
+                    <h2 class="text-primary mb-0"><i class="fa fa-user-edit"></i></h2>
+                </a>
+                <a href="#" class="sidebar-toggler flex-shrink-0">
+                    <i class="fa fa-bars"></i>
+                </a>
+             
+              
+            </nav>
+            <!-- Navbar End -->
+
+
+
+            <!-- Sales Chart Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-12 col-xl-12">
+                        <div class="bg-secondary text-center rounded p-4">
+                            <div class="d-flex align-items-center justify-content-between mb-4">
+                                <h6 class="mb-0">Active Stocks</h6>
+                                <a href="">Show All</a>
+                            </div>
+                            {% block Left_Plot %}
+
+                                {% autoescape off %}
+                                    {{ plot_div_left }}
+                                {% endautoescape %}
+
+                            {% endblock Left_Plot %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Sales Chart End -->
+
+
+           <!-- Recent Sales Start -->
+<!-- Top Companies Section Start -->
+<style>
+    .glow-box {
+        box-shadow: 0 0 20px green;
+        animation: glow 1s ease-in-out infinite alternate;
+        padding: 20px;
+    }
+
+    /* Keyframes for glowing animation */
+    @keyframes glow {
+        from {
+            box-shadow: 0 0 20px green;
+        }
+
+        to {
+            box-shadow: 0 0 40px green;
+        }
+    }
+
+    .glow-box-red {
+        box-shadow: 0 0 20px red;
+        animation: glow-red 1s ease-in-out infinite alternate;
+        padding: 20px;
+    }
+
+    /* Keyframes for red glowing animation */
+    @keyframes glow-red {
+        from {
+            box-shadow: 0 0 20px red;
+        }
+
+        to {
+            box-shadow: 0 0 40px red;
+        }
+    }
+
+    .glow-box-orange {
+        box-shadow: 0 0 20px orange;
+        animation: glow-orange 1s ease-in-out infinite alternate;
+        padding: 20px;
+    }
+
+    /* Keyframes for orange glowing animation */
+    @keyframes glow-orange {
+        from {
+            box-shadow: 0 0 20px orange;
+        }
+
+        to {
+            box-shadow: 0 0 40px orange;
+        }
+    }
+
+    .glow-box-white {
+            box-shadow: 0 0 20px white;
+            animation: glow-white 1s ease-in-out infinite alternate;
+            padding: 20px;
+        }
+
+        /* Keyframes for white glowing animation */
+        @keyframes glow-white {
+            from {
+                box-shadow: 0 0 20px white;
+            }
+
+            to {
+                box-shadow: 0 0 40px white;
+            }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px;
+            border: 1px solid #151010;
+        }
+</style>
+</head>
+
+<body>
+    <div class="container-fluid pt-4 px-4">
+        <div class="row g-4">
+            <!-- Top Gaining Companies -->
+            <div class="col-sm-6 col-xl-6">
+                <div class="bg-secondary text-center rounded p-4 glow-box">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Top Gaining Companies</h6>
+                        <a href="https://finance.yahoo.com/gainers">View More</a>
+                    </div>
+                    <!-- Content for top gaining companies -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Name</th>
+                                <th>Price (Intraday)</th>
+                                <th>Change</th>
+                                <th>% Change</th>
+                                <th>Volume</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>MRUS</td>
+                                <td>Merus N.V..</td>
+                                <td>59.99</td>
+                                <td>+15.12</td>
+                                <td><span class="price-up">36.65% <i class="fas fa-arrow-up"></i></span></td>
+                                <td>6.856M</td>
+                            </tr>
+                            <tr>
+                                <td>TOWCF</td>
+                                <td>TOWA Corporation</td>
+                                <td>91.00</td>
+                                <td>21.00</td>
+                                <td><span class="price-up">30.00% <i class="fas fa-arrow-up"></i></span></td>
+                                <td>34.259M</td>
+                            </tr>
+                            <tr>
+                                <td>FREGP</td>
+                                <td>Apple Inc.</td>
+                                <td>Federal Home Loan Mortgage Corporation</td>
+                                <td>+1.46</td>
+                                <td><span class="price-up">+26% <i class="fas fa-arrow-up"></i></span></td>
+                                <td>30,111</td>
+                            </tr>
+                            <tr>
+                                <td>SRCL</td>
+                                <td>Stericycle, Inc.</td>
+                                <td>51.69</td>
+                                <td>+6.90</td>
+                                <td><span class="price-up">15.42% <i class="fas fa-arrow-up"></i></span></td>
+                                <td>1.616M</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- End Top Gaining Companies -->
+
+            <!-- Top Losing Companies -->
+            <div class="col-sm-6 col-xl-6">
+                <div class="bg-secondary text-center rounded p-4 glow-box-red">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Top Losing Companies</h6>
+                        <a href="https://finance.yahoo.com/losers">View More</a>
+                    </div>
+                    <!-- Content for top losing companies -->
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Name</th>
+                                <th>Price (Intraday)</th>
+                                <th>Change</th>
+                                <th>% Change</th>
+                                <th>Volume</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>WDAY</td>
+                                <td>Workday, Inc.</td>
+                                <td>220.91</td>
+                                <td>-39.99</td>
+                                <td><span class="price-down">-15.33% <i class="fas fa-arrow-down"></i></span></td>
+                                <td>15.623</td>
+                            </tr>
+                            <tr>
+                                <td>LGF-B</td>
+                                <td>Lions Gate Entertainment Corp.</td>
+                                <td>8.50</td>
+                                <td>-0.98</td>
+                                <td><span class="price-down">-9.78% <i class="fas fa-arrow-down"></i></span></td>
+                                <td>3.43M</td>
+                            </tr>
+                            <tr>
+                                <td>INTU</td>
+                                <td>Intuit Inc.</td>
+                                <td>606.98</td>
+                                <td>-55.27</td>
+                                <td><span class="price-down">-8.32% <i class="fas fa-arrow-down"></i></span></td>
+                                <td>4.254M</td>
+                            </tr>
+                            <tr>
+                                <td>EIPAF</td>
+                                <td>Eni S.p.A.</td>
+                                <td>14.72</td>
+                                <td>-1.30</td>
+                                <td><span class="price-down">-8.14% <i class="fas fa-arrow-down"></i></span></td>
+                                <td>459.908M</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- End Top Losing Companies -->
+        </div>
+    </div>
+
+<div class="container-fluid pt-4 px-4">
+    <div class="row g-4">
+        <!-- Top Active Companies -->
+        <div class="col-sm-6 col-xl-6">
+            <div class="bg-secondary text-center rounded p-4 glow-box-orange">
+                <div class="d-flex align-items-center justify-content-between mb-4">
+                    <h6 class="mb-0">Top Active Companies</h6>
+                    <a href="https://finance.yahoo.com/gainers">View More</a>
+                </div>
+                <!-- Content for top active companies -->
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Symbol</th>
+                            <th>Name</th>
+                            <th>Price (Intraday)</th>
+                            <th>Change</th>
+                            <th>% Change</th>
+                            <th>Volume</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>TSLA</td>
+                            <td>Tesla</td>
+                            <td>179.24</td>
+                            <td>+5.50</td>
+                            <td><span class="price-down">+3.17 <i class="fas fa-arrow-down"></i></span></td>
+                            <td>65.584M</td>
+                        </tr>
+                        <tr>
+                            <td>AMD</td>
+                            <td>Advanced Micro Devices, Inc.</td>
+                            <td>166.36</td>
+                            <td>+5.93</td>
+                            <td><span class="price-up">+3.70 <i class="fas fa-arrow-up"></i></span></td>
+                            <td>54.869M</td>
+                        </tr>
+                        <tr>
+                            <td>MARA</td>
+                            <td>Marathon Digital Holdings, Inc.</td>
+                            <td>21.21</td>
+                            <td>+1.93</td>
+                            <td><span class="price-up">+5.63 <i class="fas fa-arrow-up"></i></span></td>
+                            <td>46.64M</td>
+                        </tr>
+                        <tr>
+                            <td>GME</td>
+                            <td>AGameStop Corp.</td>
+                            <td>19.06</td>
+                            <td>+0.68</td>
+                            <td><span class="price-up">+3.71 <i class="fas fa-arrow-up"></i></span></td>
+                            <td>43.019M</td>
+                        </tr>
+                     
+                        <!-- Add more top active companies here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <!-- End Top Active Companies -->
+
+        <!-- Top Trending Companies -->
+<div class="col-sm-6 col-xl-6">
+    <div class="bg-secondary text-center rounded p-4 glow-box-white">
+        <div class="d-flex align-items-center justify-content-between mb-4">
+            <h6 class="mb-0">Top Trending Companies</h6>
+            <a href="https://finance.yahoo.com/trending">View More</a>
+        </div>
+        <!-- Content for top trending companies -->
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Name</th>
+                    <th>Price (Intraday)</th>
+                    <th>Change</th>
+                    <th>% Change</th>
+                    <th>Volume</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <tr>
+                        <td>GME</td>
+                        <td>AGameStop Corp.</td>
+                        <td>19.06</td>
+                        <td>+0.68</td>
+                        <td><span class="price-up">+3.71 <i class="fas fa-arrow-up"></i></span></td>
+                        <td>43.019M</td>
+                    </tr>
+                    <tr>
+                        <td>NVDA</td>
+                        <td>NVIDIA Corporation</td>
+                        <td>1064.9</td>
+                        <td>+26.70</td>
+                        <td><span class="price-up">+2.57 <i class="fas fa-arrow-up"></i></span></td>
+                        <td>42.019M</td>
+                    </tr>
+                    <td>AAPL</td>
+                    <td>Apple Inc.</td>
+                    <td>183.28</td>
+                    <td>-10.77</td>
+                    <td><span class="price-down">-5.55% <i class="fas fa-arrow-down"></i></span></td>
+                    <td>125.698M</td>
+                </tr>
+                <tr>
+                    <td>AMZN</td>
+                    <td>Amazon.com, Inc.</td>
+                    <td>283.28</td>
+                    <td>-4.77</td>
+                    <td><span class="price-up">-1.55% <i class="fas fa-arrow-up"></i></span></td>
+                    <td>155.698M</td>
+                </tr>
+                <!-- Add more top trending companies here -->
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- End Top Trending Companies -->
+
+    </div>
+</div>
+
+
+<style>
+    .price-up {
+        color: green;
+    }
+
+    .price-down {
+        color: red;
+    }
+
+    .fa-arrow-up,
+    .fa-arrow-down {
+        margin-left: 5px;
+    }
+</style>
+
+
+
+
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">Department of AIML</a>, All Right Reserved. 
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            Designed By <a href="https://portfolio-website-azure-eta.vercel.app/">Deekshith Harsha</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        
+        <!-- Content End -->
+
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="{% static 'lib/easing/easing.min.js' %}"></script>
+    <script src="{% static 'lib/waypoints/waypoints.min.js' %}"></script>
+    <script src="{% static 'lib/owlcarousel/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/moment-timezone.min.js' %}"></script>
+    <script src="{% static 'lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js' %}"></script>
+
+    <!-- Template Javascript -->
+    <script src="{% static 'js/main.js' %}"></script>
+    
+</body>
+
+</html>
